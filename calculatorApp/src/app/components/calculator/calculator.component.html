@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="MathCalculationform" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="control-group">
+          <label for="operation">Operation:</label>
+          <select id="operation" class="form-control">
+            <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="control-group">
+          <label for="input1">Input 1:</label>
+          <input id="input1" formControlName="input1" class="form-control" type="number" />
+          <div class="text-danger" *ngIf="MathCalculationform.controls['input1'].invalid 
+                    && (MathCalculationform.controls['input1'].dirty 
+                     || isformSubmitted ||MathCalculationform.controls['input1'].touched )">
+            <span>input1 is required</span>
+          </div>         
+          <div class="text-danger" *ngIf="MathCalculationform.controls['input1'].hasError('maxlength')">
+            <span>Input 1 cannot be longer than 10 characters</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="control-group">
+          <label for="input2">Input 2:</label>
+          <input id="input2" formControlName="input2" class="form-control" type="number" />
+          <div class="text-danger"
+            *ngIf="MathCalculationform.controls['input2'].invalid 
+                    && (MathCalculationform.controls['input2'].dirty  || isformSubmitted ||MathCalculationform.controls['input2'].touched )">
+            <span>input2 is required</span>
+          </div>
+          <div class="text-danger" *ngIf="MathCalculationform.controls['input2'].hasError('maxlength')">
+            <span>Input 1 cannot be longer than 10 characters</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="result form-group">
+          <label>Result :</label>
+          <label>{{result}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="message">
+          <label *ngIf="strMessage!=''">{{strMessage}}</label>
+        </div>
+        <div class="error-message">
+          <label *ngIf="strErrorMessage!=''">{{strErrorMessage}}</label>
+        </div>
+      </div>
+      <div class="bottom row">
+        <div class="col">
+          <button class="btn btn-primary" [disabled]="MathCalculationform.invalid" type="submit">Calculate</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-danger" type="button" (click)="clearAllControls()">Clear</button>
+        </div>
+      </div>
+
+    </form>
+
+
+    <!-- <form (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group">
+          <label for="dropdown">Select an option:</label>
+          <select id="dropdown" name="dropdown" placeholder="Select Option" class="form-control" [(ngModel)]="selectedOption">
+            <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">                 
+          <label for="input1">Input 1:</label>
+          <input id="input1" name="input1" [maxlength]="10" [defaultValue]="0" class="form-control" #input1Control="ngModel"
+            [(ngModel)]="input1" type="number">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">                    
+          <label for="input2">Input 2:</label>
+          <input id="input2" name="input2" [maxlength]="10" [defaultValue]="0" class="form-control" #input2Control="ngModel" required
+            [(ngModel)]="input2" type="number">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label>Result :</label>
+          <label>{{result}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="message">
+          <label *ngIf="strMessage!=''">{{strMessage}}</label>
+        </div>
+        <div class="error-message">
+          <label *ngIf="strErrorMessage!=''">{{strErrorMessage}}</label>
+        </div>
+      </div>
+      <div class="bottom row">
+        <div class="col">
+          <button class="btn btn-primary" type="submit">Calculate</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-danger" type="button" (click)="clearAllControls()">Clear</button>
+        </div>
+      </div>
+    </form> -->
+  </div>
+</div>
